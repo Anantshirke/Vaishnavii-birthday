@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Vaishnavi Didi🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(160deg,#ff758c,#ff7eb3);
+    overflow:hidden;
+    color:white;
+}
+
+/* TAP SCREEN */
+#tapScreen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
+    font-weight:bold;
+    animation:pulse 1.5s infinite;
+    z-index:10;
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.08);}
+}
+
+/* MAIN CONTENT */
+#content{
+    display:none;
+    height:100vh;
+    padding:15px;
+    text-align:center;
+    animation:fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+h1{
+    font-size:2.3rem;
+    text-shadow:0 0 12px rgba(255,255,255,.7);
+}
+
+/* TYPEWRITER */
+#typeText{
+    margin:10px auto;
+    font-size:1.05rem;
+    min-height:90px;
+    max-width:500px;
+}
+
+/* CAKE */
+.cake{
+    font-size:60px;
+    margin:8px auto;
+    cursor:pointer;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    50%{transform:translateY(-10px);}
+}
+
+.cut{
+    transform:scale(.9) rotate(-5deg);
+}
+
+/* SLIDESHOW */
+.slideshow{
+    margin-top:10px;
+    display:flex;
+    justify-content:center;
+}
+
+.slideshow img{
+    width:85%;
+    max-width:300px;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:18px;
+    border:3px solid rgba(255,255,255,.6);
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+    cursor:pointer;
+    animation:fadeSlide 1s;
+}
+
+@keyframes fadeSlide{
+    from{opacity:.3;}
+    to{opacity:1;}
+}
+
+/* FULLSCREEN IMAGE */
+#fullscreen{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+#fullscreen img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+}
+
+/* CONFETTI */
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* HEARTS */
+.heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    to{transform:translateY(-110vh);opacity:0;}
+}
+
+.footer{
+    margin-top:10px;
+    font-size:.85rem;
+    opacity:.9;
+}
+</style>
+</head>
+
+<body>
+
+<div id="tapScreen">💖 This is For You My kutta😒💖</div>
+
+<div id="content">
+    <h1>🎉 Happy Birthday Vaishnavi Di 🎂</h1>
+
+    <div id="typeText"></div>
+
+    <div class="cake" id="cake">🍰</div>
+    <small>(Tap the cake 🎂)</small>
+
+    <div class="slideshow">
+        <img id="slideImg" src="vaishu1.jpg">
+    </div>
+
+    <div class="footer">
+        Made with ❤️ by your Kuttaa
+    </div>
+</div>
+
+<div id="fullscreen">
+    <img id="fullImg">
+</div>
+
+<audio id="bgMusic" src="music.mp3"></audio>
+
+<script>
+/* ELEMENTS */
+const tapScreen = document.getElementById("tapScreen");
+const content = document.getElementById("content");
+const textEl = document.getElementById("typeText");
+const cake = document.getElementById("cake");
+const music = document.getElementById("bgMusic");
+
+/* MESSAGE */
+const message =
+`Happy Birthday my cutie Tai 💖
+
+Thank you for coming into this world
+and making my life happier 😍
+
+Emotionally as well as
+ financially supportive  💸😂
+
+Stay cute, stay strong,
+and keep spoiling your little brother forever 😜`;
+
+let i = 0;
+
+/* START */
+tapScreen.onclick = () => {
+    tapScreen.style.display="none";
+    content.style.display="block";
+    music.play().catch(()=>{});
+    typeWriter();
+    startHearts();
+    blastConfetti(40);
+};
+
+/* TYPEWRITER */
+function typeWriter(){
+    if(i < message.length){
+        textEl.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter,40);
+    }
+}
+
+/* CAKE */
+cake.onclick = () => {
+    cake.classList.add("cut");
+    blastConfetti(80);
+};
+
+/* CONFETTI */
+function blastConfetti(count){
+    for(let i=0;i<count;i++){
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},100%,70%)`;
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+
+/* HEARTS */
+function startHearts(){
+    setInterval(()=>{
+        const h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💖";
+        h.style.left=Math.random()*100+"vw";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    },400);
+}
+
+/* SLIDESHOW */
+const images=[
+    "vaishu1.jpg",
+    "vaishu2.jpg",
+    "vaishu3.jpg",
+    "vaishu4.jpg"
+];
+
+let current=0;
+const slideImg=document.getElementById("slideImg");
+const fullscreen=document.getElementById("fullscreen");
+const fullImg=document.getElementById("fullImg");
+
+setInterval(()=>{
+    current=(current+1)%images.length;
+    slideImg.src=images[current];
+    slideImg.style.animation="none";
+    slideImg.offsetHeight;
+    slideImg.style.animation="fadeSlide 1s";
+},2500);
+
+/* FULLSCREEN */
+slideImg.onclick=()=>{
+    fullImg.src=slideImg.src;
+    fullscreen.style.display="flex";
+};
+
+fullscreen.onclick=()=>{
+    fullscreen.style.display="none";
+};
+</script>
+
+</body>
+</html>
